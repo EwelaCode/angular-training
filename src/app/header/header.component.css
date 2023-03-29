@@ -1,0 +1,13 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-icon {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.header {
+  background-color: #26c6da;
+}
