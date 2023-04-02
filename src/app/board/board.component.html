@@ -1,0 +1,48 @@
+<div class="margin-item">
+  <h2>Scrum board items:</h2>
+
+
+<button appHighlight>My test button - with Directive</button>
+
+<!-- <app-item (nameChange)="nameOnParent=$event"  [name]="nameOnParent"></app-item> -->
+<!-- <app-item [(name)]="nameOnParent"></app-item> -->
+
+
+<!-- <input type="text" [(ngModel)]="userName" ><br/>
+    {{userName}} -->
+
+
+<div *ngIf="isItemEdited" class="margin-item">
+  <app-item  [(name)]="selectedItem.name" [(isEdited)]="isItemEdited"></app-item>
+</div>
+
+<!-- TODO: can be done with ngFor -->
+<div>
+  <button mat-raised-button color="primary" (click)="changeItemsDisplay('To Do')" class="margin-item">To Do</button>
+  <button mat-raised-button color="primary" (click)="changeItemsDisplay('In Progress')" class="margin-item">In Progress</button>
+  <button mat-raised-button color="primary" (click)="changeItemsDisplay('Completed')" class="margin-item">Completed</button>
+</div>
+
+
+<mat-card *ngFor="let boardItem of boardItems; let i = index" class="margin-item" >
+  <div *ngIf="itemsDisplay === boardItem.status" >
+    <mat-card-header >
+      <!-- [style.--mdc-chip-label-text-color]="statusColor()" -->
+      <!-- [class] https://angular.io/guide/class-binding -->
+      <mat-card-title>{{ boardItem.name}}<mat-chip  [class.selected]="boardItem.name === selectedItem.name">{{boardItem.status}}</mat-chip></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      {{ boardItem.description }}
+      <!-- 2 way data binding example -->
+    </mat-card-content>
+    <mat-card-actions>
+      <button *ngIf="!isItemEdited" mat-button color="primary" (click)="selectItem(boardItems[i])">Edit</button>
+      <!-- did not work with  [(item)]="boardItem"-->
+      <!-- <app-item-dialog [(item)]="boardItems[i]"></app-item-dialog> -->
+    </mat-card-actions>
+  </div>
+</mat-card>
+
+
+</div>
+

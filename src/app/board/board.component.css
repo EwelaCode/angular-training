@@ -1,0 +1,13 @@
+.margin-item {
+  margin: 20px;
+}
+
+
+.status {
+  margin: 10px;
+  --mdc-chip-label-text-color: red;
+}
+
+.selected {
+  --mdc-chip-label-text-color: blue;
+}
