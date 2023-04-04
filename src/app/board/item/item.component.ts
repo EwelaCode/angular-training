@@ -12,8 +12,8 @@ export class ItemComponent {
 
   //Input() decorator means that
   //we can pass parameters to this component
-  @Input() isEdited!: Boolean;
-  @Output() isEditedChange = new EventEmitter<Boolean>();
+  @Input() isEdited!: boolean;
+  @Output() isEditedChange = new EventEmitter<boolean>();
 
   @Input() name!: string;
   @Output() nameChange = new EventEmitter<string>();
@@ -30,6 +30,7 @@ export class ItemComponent {
 
   changeName(): void {
     this.nameChange.emit(this.name);
+    this.isEditedChange.emit(false)
     console.log('emited changeName', this.item)
   }
 

@@ -11,11 +11,6 @@
 <!-- <input type="text" [(ngModel)]="userName" ><br/>
     {{userName}} -->
 
-
-<div *ngIf="isItemEdited" class="margin-item">
-  <app-item  [(name)]="selectedItem.name" [(isEdited)]="isItemEdited"></app-item>
-</div>
-
 <!-- TODO: can be done with ngFor -->
 <div>
   <button mat-raised-button color="primary" (click)="changeItemsDisplay('To Do')" class="margin-item">To Do</button>
@@ -23,13 +18,17 @@
   <button mat-raised-button color="primary" (click)="changeItemsDisplay('Completed')" class="margin-item">Completed</button>
 </div>
 
+<div *ngIf="isItemEdited" class="margin-item">
+  <app-item  [(name)]="selectedItem.name" [(isEdited)]="isItemEdited"></app-item>
+</div>
 
 <mat-card *ngFor="let boardItem of boardItems; let i = index" class="margin-item" >
   <div *ngIf="itemsDisplay === boardItem.status" >
     <mat-card-header >
-      <!-- [style.--mdc-chip-label-text-color]="statusColor()" -->
+      <!-- [style.--mdc-chip-label-text-color]="getStatusColor()" -->
       <!-- [class] https://angular.io/guide/class-binding -->
-      <mat-card-title>{{ boardItem.name}}<mat-chip  [class.selected]="boardItem.name === selectedItem.name">{{boardItem.status}}</mat-chip></mat-card-title>
+      <!-- [class.selected]="boardItem.name === selectedItem.name" -->
+      <mat-card-title>{{ boardItem.name}}<mat-chip class="margin-item" [style.--mdc-chip-elevated-container-color]="getStatusColor(boardItem.status)">{{boardItem.status}}</mat-chip></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       {{ boardItem.description }}
@@ -44,5 +43,16 @@
 </mat-card>
 
 
+
+<app-content-projection>
+  <ng-container ngProjectAs="[question]">
+    <p>Is content projection cool? - project content as a different element example</p>
+  </ng-container>
+  <!-- <p question>
+    Is content projection cool? - select="[question]" part goes here
+  </p> -->
+  <p>The default code</p>
+  <p>other part of code to see where it goes... </p>
+</app-content-projection>
 </div>
 
