@@ -1,8 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BoardComponent } from './board/board.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 const routes: Routes = [
-  { path: 'compose', redirectTo: '/board', pathMatch: 'full' },
+  { path: '', redirectTo: '/board', pathMatch: 'full' },
+  { path: 'board', component: BoardComponent
+  // we need to add second <router-outlet></router-outlet> to handle children paths
+  //children: [
+    // {
+    //   path: 'child-a', // child route path
+    //   component: ChildAComponent, // child route component that the router renders
+    // },
+    // {
+    //   path: 'child-b',
+    //   component: ChildBComponent, // another child route component that the router renders
+    // },
+  },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: '**', component: ErrorPageComponent }
 ];
 
 @NgModule({

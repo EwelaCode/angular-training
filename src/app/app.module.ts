@@ -18,11 +18,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { BoardModule } from './board/board.module';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    LoginComponent,
+    SignupComponent,
+    ErrorPageComponent,
     // BoardComponent,
     // ItemComponent,
     // ItemDialogComponent,
