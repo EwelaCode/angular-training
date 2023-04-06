@@ -17,6 +17,8 @@ export class BoardComponent implements OnInit {
   nameOnParent: string = 'My test name';
   userName = 'My user test name for 2 way Data-Binding';
 
+  condition = false;
+
   constructor(private boardItemsService: BoardService) {}
 
   ngOnInit() {
@@ -39,5 +41,14 @@ export class BoardComponent implements OnInit {
 
   changeItemsDisplay(rule: string) {
     this.itemsDisplay = rule;
+    // if (rule === 'Completed') {
+    //   this.condition = true;
+    // } else {
+    //   this.condition = false;
+    // }
+  }
+
+  changeCondition() {
+    this.condition = !this.condition;
   }
 }

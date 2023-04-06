@@ -43,6 +43,34 @@
 </mat-card>
 
 
+<div>
+  <h2>Structural directive that accepts a task as an input and renders an underlying element only when the status is
+    “done” </h2>
+
+  <ng-container *ngFor="let boardItem of boardItems; let i = index" class="margin-item">
+    <mat-card *completedItems="boardItem">
+        <mat-card-header>
+          <!-- [style.--mdc-chip-label-text-color]="getStatusColor()" -->
+          <!-- [class] https://angular.io/guide/class-binding -->
+          <!-- [class.selected]="boardItem.name === selectedItem.name" -->
+          <mat-card-title>{{ boardItem.name}}<mat-chip class="margin-item"
+              [style.--mdc-chip-elevated-container-color]="getStatusColor(boardItem.status)">{{boardItem.status}}</mat-chip></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          {{ boardItem.description }}
+          <!-- 2 way data binding example -->
+        </mat-card-content>
+        <mat-card-actions>
+          <button *ngIf="!isItemEdited" mat-button color="primary" (click)="selectItem(boardItems[i])">Edit</button>
+          <!-- did not work with  [(item)]="boardItem"-->
+          <!-- <app-item-dialog [(item)]="boardItems[i]"></app-item-dialog> -->
+        </mat-card-actions>
+    </mat-card>
+  </ng-container>
+
+</div>
+
+
 
 <app-content-projection>
   <ng-container ngProjectAs="[question]">

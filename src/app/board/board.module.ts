@@ -26,7 +26,7 @@ import { ItemDirectiveDirective } from './item-directive.directive';
     ItemDialogComponent,
     DialogContentComponent,
     ContentProjectionComponent,
-    ItemDirectiveDirective
+    ItemDirectiveDirective,
   ],
   imports: [
     // do I have to import it in every module?
@@ -49,7 +49,8 @@ import { ItemDirectiveDirective } from './item-directive.directive';
     ItemComponent,
     ItemDialogComponent,
     DialogContentComponent,
-    ContentProjectionComponent
+    ContentProjectionComponent,
+    ItemDirectiveDirective
   ],
 })
 export class BoardModule { }
