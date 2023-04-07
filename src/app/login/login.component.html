@@ -1,2 +1,28 @@
-<p>login works!</p>
-<button (click)="goToSignup()">Sign In</button>
+<form #authForm="ngForm" (ngSubmit)="onLogin(authForm)" class="center">
+  <div>
+    <mat-form-field>
+      <mat-label for="username">Name</mat-label>
+      <input matInput type="text" id="username" ngModel name="username" required username>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <mat-label for="password">Password</mat-label>
+    <input matInput type="password" id="password" ngModel name="password" required minlength="5">
+  </mat-form-field>
+
+  <div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!authForm.valid">
+      Login
+    </button>
+
+  </div>
+
+  <div>
+    <p style="margin-top: 30px">
+      If you are not registered, please Sign In!
+    </p>
+  </div>
+  <button mat-raised-button (click)="goToSignup()">Sign In</button>
+
+</form>

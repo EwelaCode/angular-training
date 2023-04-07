@@ -2,7 +2,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { BoardItem } from '../shared/boardItem.model';
 
 @Directive({
-  selector: '[appUnless]'
+  selector: '[completedItems]'
 })
 export class ItemDirectiveDirective {
   private hasView = false;
