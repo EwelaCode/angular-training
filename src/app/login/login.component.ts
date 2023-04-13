@@ -31,6 +31,8 @@ export class LoginComponent {
 
     this.authService.login(username, password).subscribe(resData => {
       console.log(resData);
+      this.router.navigate(['/'])
+      //we can use errorHandler here to display error msg in UI
     });
 
     console.log(form)

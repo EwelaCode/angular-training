@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthComponent } from './auth/auth.component';
+import { httpInterceptorProviders } from './http-interceptors';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { AuthComponent } from './auth/auth.component';
     // module import
     BoardModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

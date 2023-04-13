@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardItem } from '../shared/boardItem.model';
 import { BoardService } from './board.service';
+import { BoardItems } from './board-items';
 
 @Component({
   selector: 'app-board',
@@ -19,10 +20,14 @@ export class BoardComponent implements OnInit {
 
   condition = false;
 
+  boardItemsBackend: BoardItems[] = []
+
   constructor(private boardItemsService: BoardService) {}
 
   ngOnInit() {
-    this.boardItems = this.boardItemsService.getBoardItems();
+    this.boardItemsService.getBoardItems().subscribe((data: BoardItems[]) => this.boardItemsBackend = data);
+
+    console.log(this.boardItemsBackend, 'items from Backend')
   }
 
   getStatusColor(status: string) {
@@ -50,5 +55,11 @@ export class BoardComponent implements OnInit {
 
   changeCondition() {
     this.condition = !this.condition;
+  }
+
+  addColumns() {
+    this.boardItemsService.addBoardColumns().subscribe(resData => {
+      console.log(resData);
+    });
   }
 }

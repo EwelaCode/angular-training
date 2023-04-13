@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { HighlightDirective } from './highlight.directive';
 import { ContentProjectionComponent } from './content-projection/content-projection.component';
 import { ItemDirectiveDirective } from './item-directive.directive';
+import { AddItemComponent } from './add-item/add-item.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ItemDirectiveDirective } from './item-directive.directive';
     DialogContentComponent,
     ContentProjectionComponent,
     ItemDirectiveDirective,
+    AddItemComponent,
   ],
   imports: [
     // do I have to import it in every module?
