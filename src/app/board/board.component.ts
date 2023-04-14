@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BoardItem } from '../shared/boardItem.model';
 import { BoardService } from './board.service';
 import { BoardItems } from './board-items';
+import { initialBoardItems } from '../shared/mocks';
 
 @Component({
   selector: 'app-board',
@@ -27,7 +28,8 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     this.boardItemsService.getBoardItems().subscribe((data: BoardItems[]) => this.boardItemsBackend = data);
 
-    console.log(this.boardItemsBackend, 'items from Backend')
+
+    this.boardItems = initialBoardItems;
   }
 
   getStatusColor(status: string) {

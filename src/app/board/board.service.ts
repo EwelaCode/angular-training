@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
 import { BoardItem } from '../shared/boardItem.model';
 import { initialBoardItems } from '../shared/mocks';
 import { HttpClient } from '@angular/common/http';
 import { BoardItems } from './board-items';
-
-const mockColumnsData = {
-  title: 'Column 1'
-}
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -21,12 +19,23 @@ export class BoardService {
     // we return copy of array
     // return this.ingredients.slice();
 
-    return this.http.get<BoardItems[]>('http://localhost:3000/dev/board');
+    // safe option to connect url to avoid // or no slash at all => Location.joinWithSlash
+    return this.http.get<BoardItems[]>( Location.joinWithSlash(environment.url, '/board') );
   }
 
   addBoardColumns() {
     console.log('add colums')
 
-    return this.http.post('http://localhost:3000/dev/columns', {title: 'Test'});
+    return this.http.post(Location.joinWithSlash(environment.url, '/columns'), {title: 'Test'});
+  }
+
+  addBoardItem(data: BoardItem) {
+        this.ingredients.push(data);
+
+        return this.http.post(Location.joinWithSlash(environment.url, '/tasks'), {
+          title: data.name,
+          description: data.description,
+          columnId: 'b847f8d2-c234-48d2-809d-f5f7b141814b'
+        });
   }
 }

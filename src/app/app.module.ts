@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { HeaderComponent } from './header/header.component';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HighlightDirective } from './board/highlight.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -50,8 +53,10 @@ import { httpInterceptorProviders } from './http-interceptors';
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
     // module import
     BoardModule,
+    ReactiveFormsModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
