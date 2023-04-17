@@ -1,6 +1,5 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
@@ -13,9 +12,6 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
-  //get/set
-  token = '';
-
 
   constructor(private http: HttpClient) {}
 
@@ -33,15 +29,10 @@ export class AuthService {
         password,
       })
       .pipe(
-        // catchError(this.handleError),
         tap((resData) => {
-          this.token = resData.access_token;
+          localStorage.setItem('token', resData.access_token);
         })
       );
-  }
-
-  private handleError(errorResponse: HttpErrorResponse) {
-    return throwError(() => errorResponse.message);
   }
 
 }

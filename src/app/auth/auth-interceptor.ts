@@ -3,22 +3,19 @@ import {
   HttpEvent, HttpInterceptor, HttpHandler, HttpRequest
 } from '@angular/common/http';
 
-import { AuthService } from './auth.service';
-
-
 import { Observable } from 'rxjs';
 
 /** Pass untouched request through to the next request handler. */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private auth: AuthService) {}
+  constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
 
     // Get the auth token from the service.
     //we can use get/set method to store token
-    const authToken = this.auth.token;
+    const authToken = localStorage.getItem('token');
 
     // Clone the request and replace the original headers with
     // cloned headers, updated with the authorization.
