@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BoardService } from '../board.service';
+import { BoardColumn } from '../board-items';
 
 @Component({
   selector: 'app-add-item',
@@ -8,8 +9,10 @@ import { BoardService } from '../board.service';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent implements OnInit {
+  @Input() boardItemsBackend: BoardColumn[] = [];
   addItemForm!: FormGroup;
   loading = false;
+  errorMessage: string | null = null;
 
   constructor(private formBuilder: FormBuilder,
     private boardItemsService: BoardService
@@ -17,7 +20,7 @@ export class AddItemComponent implements OnInit {
 
   ngOnInit() {
     this.addItemForm = this.formBuilder.group({
-      name: ['', [
+      title: ['', [
         Validators.required,
         Validators.minLength(3)
       ]],
@@ -26,26 +29,26 @@ export class AddItemComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(4000),
       ]],
-      status: ['To Do', [
+      columnId: ['', [
         Validators.required,
         // @TODO: we could create own validator to check if it's valid status value
       ]],
     })
 
-    this.addItemForm.valueChanges.subscribe(console.log)
+    // this.addItemForm.valueChanges.subscribe(console.log)
   }
 
   // we need it to display error messages
-  get name() {
-    return this.addItemForm.get('name')
+  get title() {
+    return this.addItemForm.get('title')
   }
 
   get description() {
     return this.addItemForm.get('description')
   }
 
-  get status() {
-    return this.addItemForm.get('status')
+  get columnId() {
+    return this.addItemForm.get('columnId')
   }
 
 
@@ -56,7 +59,12 @@ export class AddItemComponent implements OnInit {
 
     const formValues = this.addItemForm.value;
 
-    this.boardItemsService.addBoardItem(formValues).subscribe(data => console.log(data))
+    this.boardItemsService.addBoardItem(formValues).subscribe({
+      next: () => {},
+      error: (error) => {
+        this.errorMessage = `Add Item - Error ocurred - ${error.statusText}`
+      },
+    });
 
     this.addItemForm.reset({status: 'To Do'});
     this.loading = false;

@@ -1,32 +1,29 @@
 <form [formGroup]="addItemForm" (ngSubmit)="addBoardItem()">
   <!-- Value: {{ addItemForm.value | json }} -->
-  <hr>
   <br>
   <mat-form-field>
-    <input matInput placeholder="Title" formControlName="name">
-    <mat-error *ngIf="name?.invalid && name?.touched">
-      Please type task name.
+    <input matInput placeholder="Title" formControlName="title">
+    <mat-error *ngIf="title?.invalid && title?.touched">
+      Please type task title.
     </mat-error>
   </mat-form-field>
   <br>
   <mat-form-field>
     <textarea matInput placeholder="Description" formControlName="description">
     </textarea>
-    <mat-error *ngIf="name?.invalid && name?.touched">
+    <mat-error *ngIf="description?.invalid && description?.touched">
       Please type task description.
     </mat-error>
   </mat-form-field>
   <br>
-  <mat-radio-group formControlName="status">
-    <mat-radio-button value="To Do">To Do</mat-radio-button>
-    <mat-radio-button  value="In Progress">In Progress</mat-radio-button>
-    <mat-radio-button  value="Completed">Completed</mat-radio-button>
+  <mat-radio-group formControlName="columnId" >
+    <mat-radio-button *ngFor="let column of boardItemsBackend" [value]="column.id">{{column.title}}</mat-radio-button>
   </mat-radio-group>
   <br>
   <br>
   <div *ngIf="loading">Loading...</div>
   <button mat-raised-button color="primary"[disabled]="addItemForm.invalid" >Add Item</button>
+  <div  *ngIf="errorMessage" class="error-msg">{{errorMessage}}</div>
   <br>
   <br>
-  <hr>
 </form>

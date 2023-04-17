@@ -8,7 +8,6 @@ export class ItemDirectiveDirective {
   private hasView = false;
 
   @Input() set completedItems(boardItem: BoardItem) {
-    console.log(boardItem.status)
     if (boardItem.status === 'Completed' && !this.hasView) {
       this.viewContainer.createEmbeddedView(this.templateRef);
       this.hasView = true;

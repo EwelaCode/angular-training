@@ -11,3 +11,8 @@
 .selected {
   --mdc-chip-label-text-color: blue;
 }
+
+.error-msg {
+  font-weight: bold;
+  color: red;
+}

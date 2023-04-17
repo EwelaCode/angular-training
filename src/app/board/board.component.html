@@ -1,23 +1,33 @@
 <div class="margin-item">
-  <h2>Scrum board items:</h2>
-
-
-<button appHighlight>My test button - with Directive</button>
-
-<!-- <app-item (nameChange)="nameOnParent=$event"  [name]="nameOnParent"></app-item> -->
-<!-- <app-item [(name)]="nameOnParent"></app-item> -->
-
-
-<!-- <input type="text" [(ngModel)]="userName" ><br/>
-    {{userName}} -->
-
+  <!-- Boards from Backend -->
+<div><h1>Server Data</h1></div>
 <br>
+<app-add-item [boardItemsBackend]="boardItemsBackend"></app-add-item>
 <br>
-<br>
-<app-add-item></app-add-item>
-<br>
+
+
+<div>
+<div  *ngIf="errorMessage" class="error-msg">{{errorMessage}}</div>
+<h2 *ngFor="let boardItemBackend of boardItemsBackend; let i = index" class="margin-item" >
+{{ boardItemBackend.title }}
+
+  <mat-card *ngFor="let task of boardItemBackend.tasks; let i = index" class="margin-item" >
+      <mat-card-header >
+        <mat-card-title>{{ task.title}}<mat-chip class="margin-item" [style.--mdc-chip-elevated-container-color]="getStatusColor(boardItemBackend.title)">{{boardItemBackend.title}}</mat-chip></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{ task.description }}
+      </mat-card-content>
+  </mat-card>
+
+</h2>
+</div>
 
 <!-- TODO: can be done with ngFor -->
+<hr>
+<br>
+<br>
+<div><h1>Mocked Data Playground</h1></div>
 <div>
   <button mat-raised-button color="primary" (click)="changeItemsDisplay('To Do')" class="margin-item">To Do</button>
   <button mat-raised-button color="primary" (click)="changeItemsDisplay('In Progress')" class="margin-item">In Progress</button>
@@ -98,3 +108,12 @@
   <button (click)="addColumns()">Add Columns</button>
 </div>
 
+
+<button appHighlight>My test button - with Directive</button>
+
+<!-- <app-item (nameChange)="nameOnParent=$event"  [name]="nameOnParent"></app-item> -->
+<!-- <app-item [(name)]="nameOnParent"></app-item> -->
+
+
+<!-- <input type="text" [(ngModel)]="userName" ><br/>
+    {{userName}} -->

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Observable, Subject, Subscription, startWith, switchMap, takeUntil } from 'rxjs';
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BoardItem } from '../shared/boardItem.model';
 import { BoardService } from './board.service';
-import { BoardItems } from './board-items';
+import { BoardColumn, BoardItems } from './board-items';
 import { initialBoardItems } from '../shared/mocks';
 
 @Component({
@@ -10,7 +12,7 @@ import { initialBoardItems } from '../shared/mocks';
   styleUrls: ['./board.component.css'],
   providers: [BoardService]
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   boardItems: BoardItem[] = [];
   selectedItem: BoardItem = { name: '', description: '', status: '' };
   isItemEdited = false;
@@ -19,14 +21,31 @@ export class BoardComponent implements OnInit {
   nameOnParent: string = 'My test name';
   userName = 'My user test name for 2 way Data-Binding';
 
-  condition = false;
+  errorMessage: string | null = null;
 
-  boardItemsBackend: BoardItems[] = []
+  boardItemsBackend: BoardColumn[] = [];
+  // private subscription: Subscription;
+  destroy$ = new Subject<void>();
 
   constructor(private boardItemsService: BoardService) {}
 
   ngOnInit() {
-    this.boardItemsService.getBoardItems().subscribe((data: BoardItems[]) => this.boardItemsBackend = data);
+
+    this.boardItemsService.dataChanged$.pipe(
+      // startWith to trigger the switchMap; without that we have no value
+      startWith(null),
+      switchMap(() => this.boardItemsService.getBoardItems()),
+      takeUntil(this.destroy$)
+    ).subscribe({
+      next: (data: BoardColumn[]) => {
+        this.errorMessage = null;
+        this.boardItemsBackend = data
+      },
+      error: (error) => {
+        this.errorMessage = `Board items data it's not available - ${error.statusText}`
+      },
+    })
+//https://rxjs.dev/deprecations/subscribe-arguments
 
 
     this.boardItems = initialBoardItems;
@@ -48,20 +67,17 @@ export class BoardComponent implements OnInit {
 
   changeItemsDisplay(rule: string) {
     this.itemsDisplay = rule;
-    // if (rule === 'Completed') {
-    //   this.condition = true;
-    // } else {
-    //   this.condition = false;
-    // }
   }
 
-  changeCondition() {
-    this.condition = !this.condition;
-  }
 
   addColumns() {
     this.boardItemsService.addBoardColumns().subscribe(resData => {
       console.log(resData);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
