@@ -1,0 +1,5 @@
+<p>search works!</p>
+<input #searchBox (keyup)="search(searchBox.value)" />
+<ul>
+  <li *ngFor="let result of results$ | async">{{ result }}</li>
+</ul>

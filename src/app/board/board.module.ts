@@ -21,6 +21,7 @@ import { HighlightDirective } from './highlight.directive';
 import { ContentProjectionComponent } from './content-projection/content-projection.component';
 import { ItemDirectiveDirective } from './item-directive.directive';
 import { AddItemComponent } from './add-item/add-item.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AddItemComponent } from './add-item/add-item.component';
     ContentProjectionComponent,
     ItemDirectiveDirective,
     AddItemComponent,
+    SearchComponent,
   ],
   imports: [
     ReactiveFormsModule,
