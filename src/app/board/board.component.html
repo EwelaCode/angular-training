@@ -1,17 +1,20 @@
 <div class="margin-item">
+  <!-- <div *ngFor="let item of (data$| async)?.boardItems">{{ item.title }}!!!!!!</div> -->
+
 
   <app-search></app-search>
   <!-- Boards from Backend -->
 <div><h1>Server Data</h1></div>
+
 <br>
-<app-add-item [boardItemsBackend]="boardItemsBackend"></app-add-item>
+<app-add-item [boardItemsBackend]="boardItemsBackend$"></app-add-item>
 <br>
 
 
 <div>
 <div  *ngIf="errorMessage" class="error-msg">{{errorMessage}}</div>
-<h2 *ngFor="let boardItemBackend of boardItemsBackend; let i = index" class="margin-item" >
-<!-- <h2 *ngFor="let boardItemBackend of boardItemsBackend | statusFilter: 'Completed'; let i = index" class="margin-item" > -->
+<h2 *ngFor="let boardItemBackend of (boardItemsBackend$ | async)?.boardItems; let i = index" class="margin-item" >
+<!-- <h2 *ngFor="let boardItemBackend of boardItemsBackend | statusFilter : 'Completed' ; let i = index" class="margin-item" > -->
 
 {{ boardItemBackend.title }}
 

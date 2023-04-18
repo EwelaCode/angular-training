@@ -1,7 +1,8 @@
+import { BoardColumn } from "../board/board-items";
 import * as BoardActions from "./board.actions";
 
 export interface BoardItemsState {
-  boardItems: any[];
+  boardItems: BoardColumn[];
   editedBoardItem: any;
   editedIngredientIndex: number;
 }
@@ -17,10 +18,17 @@ export function boardItemsReducer(
   action: BoardActions.BoardActions
 ) {
   switch (action.type) {
+
+    case BoardActions.SET_BOARD_ITEMS_SUCCESS:
+      return {
+        ...state,
+        boardItems: [...action.payload],
+      };
+
     case BoardActions.ADD_BOARD_ITEM:
       return {
         ...state,
-        boardItems: [...state.boardItems, action.payload],
+        boardItems: state.boardItems.map(el => el.id !== action.payload.columnId? el : el.tasks.push(action.payload)),
       };
     case BoardActions.UPDATE_BOARD_ITEM:
       const boardItem = state.boardItems[state.editedIngredientIndex];

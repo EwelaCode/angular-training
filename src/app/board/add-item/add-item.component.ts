@@ -2,6 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BoardService } from '../board.service';
 import { BoardColumn } from '../board-items';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { State } from '../../reducers';
+import * as BoardActions from "../../reducers/board.actions";
+
 
 @Component({
   selector: 'app-add-item',
@@ -9,13 +14,15 @@ import { BoardColumn } from '../board-items';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent implements OnInit {
-  @Input() boardItemsBackend: BoardColumn[] = [];
+  @Input() boardItemsBackend:  Observable<{boardItems: BoardColumn[]}>;
+  // @Input() boardItemsBackend: BoardColumn[] = [];
   addItemForm!: FormGroup;
   loading = false;
   errorMessage: string | null = null;
 
   constructor(private formBuilder: FormBuilder,
-    private boardItemsService: BoardService
+    private boardItemsService: BoardService,
+    private store: Store<State>
     ) {}
 
   ngOnInit() {
@@ -60,7 +67,7 @@ export class AddItemComponent implements OnInit {
     const formValues = this.addItemForm.value;
 
     this.boardItemsService.addBoardItem(formValues).subscribe({
-      next: () => {},
+      next: (data) => {this.store.dispatch(new BoardActions.AddBoardItem(data))},
       error: (error) => {
         this.errorMessage = `Add Item - Error ocurred - ${error.statusText}`
       },

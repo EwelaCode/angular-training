@@ -5,6 +5,9 @@ import { BoardItem } from '../shared/boardItem.model';
 import { BoardService } from './board.service';
 import { BoardColumn, BoardItems } from './board-items';
 import { initialBoardItems } from '../shared/mocks';
+import { Store } from '@ngrx/store';
+import { State } from '../reducers';
+import { SetBoardItems } from '../reducers/board.actions';
 
 @Component({
   selector: 'app-board',
@@ -27,26 +30,29 @@ export class BoardComponent implements OnInit, OnDestroy {
   // private subscription: Subscription;
   destroy$ = new Subject<void>();
 
-  constructor(private boardItemsService: BoardService) {}
+
+  boardItemsBackend$ = this.store.select('boardItems');
+
+  constructor(private boardItemsService: BoardService,
+    private store: Store<State>) {}
 
   ngOnInit() {
+    this.store.dispatch(new SetBoardItems());
 
-    this.boardItemsService.dataChanged$.pipe(
-      // startWith to trigger the switchMap; without that we have no value
-      startWith(null),
-      switchMap(() => this.boardItemsService.getBoardItems()),
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (data: BoardColumn[]) => {
-        this.errorMessage = null;
-        this.boardItemsBackend = data
-      },
-      error: (error) => {
-        this.errorMessage = `Board items data it's not available - ${error.statusText}`
-      },
-    })
-//https://rxjs.dev/deprecations/subscribe-arguments
-
+    // this.boardItemsService.dataChanged$.pipe(
+    //   // startWith to trigger the switchMap; without that we have no value
+    //   startWith(null),
+    //   switchMap(() => this.boardItemsService.getBoardItems()),
+    //   takeUntil(this.destroy$)
+    // ).subscribe({
+    //   next: (data: BoardColumn[]) => {
+    //     this.errorMessage = null;
+    //     this.boardItemsBackend = data
+    //   },
+    //   error: (error) => {
+    //     this.errorMessage = `Board items data it's not available - ${error.statusText}`
+    //   },
+    // })
 
     this.boardItems = initialBoardItems;
   }

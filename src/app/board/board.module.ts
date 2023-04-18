@@ -5,6 +5,8 @@ import { ItemComponent } from './item/item.component';
 import { ItemDialogComponent } from './item-dialog/item-dialog.component';
 import { DialogContentComponent } from './item-dialog/dialog-content/dialog-content.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+
 
 import {MatIconModule} from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,6 +25,7 @@ import { ItemDirectiveDirective } from './item-directive.directive';
 import { AddItemComponent } from './add-item/add-item.component';
 import { SearchComponent } from './search/search.component';
 import { StatusFilterPipe } from '../shared/status-filter.pipe'
+import { BoardEffects } from './board.effects';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,7 @@ import { StatusFilterPipe } from '../shared/status-filter.pipe'
     MatInputModule,
     HighlightDirective,
     MatRadioModule,
+    EffectsModule.forRoot([BoardEffects])
   ],
   exports: [
     CommonModule,

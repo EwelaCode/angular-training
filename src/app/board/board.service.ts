@@ -36,6 +36,7 @@ export class BoardService {
   addBoardItem(data: BoardItem) {
     return this.http.post(Location.joinWithSlash(environment.url, '/tasks'), data)
       .pipe(
+        // here we can handle dispach action
         tap(() => this.dataChanged$.next())
       );
   }

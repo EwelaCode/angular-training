@@ -17,12 +17,14 @@
   </mat-form-field>
   <br>
   <mat-radio-group formControlName="columnId" >
-    <mat-radio-button *ngFor="let column of boardItemsBackend" [value]="column.id">{{column.title}}</mat-radio-button>
+    <mat-radio-button *ngFor="let column of (boardItemsBackend | async)?.boardItems" [value]="column.id">{{column.title}}</mat-radio-button>
   </mat-radio-group>
   <br>
   <br>
   <div *ngIf="loading">Loading...</div>
-  <button mat-raised-button color="primary"[disabled]="addItemForm.invalid" >Add Item</button>
+  <button mat-raised-button color="primary" >Add Item</button>
+
+  <!-- <button mat-raised-button color="primary"[disabled]="addItemForm.invalid" >Add Item</button> -->
   <div  *ngIf="errorMessage" class="error-msg">{{errorMessage}}</div>
   <br>
   <br>
