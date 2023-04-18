@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators';
 
 import { SearchService } from './search.service';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -11,18 +12,15 @@ import { SearchService } from './search.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  private searchTerms = new Subject<string>();
+  searchField = new FormControl('');
   results$: Observable<string[]>;
 
   constructor(private searchService: SearchService) {
-    this.results$ = this.searchTerms.pipe(
+    this.results$ = this.searchField.valueChanges.pipe(
+      filter(value => typeof value === 'string'),
       debounceTime(200),
-      distinctUntilChanged(),
+      distinctUntilChanged<any>(),
       switchMap((term: string) => this.searchService.search(term)),
     )
-  }
-
-  search(term: string): void {
-    this.searchTerms.next(term);
   }
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +27,10 @@ import { SignupComponent } from './signup/signup.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthComponent } from './auth/auth.component';
 import { httpInterceptorProviders } from './http-interceptors';
+import { StoreModule } from '@ngrx/store';
+// import { reducers, metaReducers } from './board/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './reducers'
 
 @NgModule({
   declarations: [
@@ -57,6 +61,9 @@ import { httpInterceptorProviders } from './http-interceptors';
     // module import
     BoardModule,
     ReactiveFormsModule,
+    StoreModule.forRoot(reducers),
+    // StoreModule.forRoot(reducers, { metaReducers }),
+    // isDevMode() ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

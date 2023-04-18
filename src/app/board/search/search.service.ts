@@ -16,7 +16,7 @@ export class SearchService {
 
   search(term: string): Observable<any> {
     return this.http
-      .get<BoardItems>(Location.joinWithSlash(environment.url, `/board?search=${term}`))
+      .get<BoardItems>(Location.joinWithSlash(environment.url, `/board`), {params: {search: term}})
       .pipe(map((response) => {
        return response.columns.map(column => column.title)
       }));
