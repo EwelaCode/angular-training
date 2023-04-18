@@ -11,6 +11,8 @@
 <div>
 <div  *ngIf="errorMessage" class="error-msg">{{errorMessage}}</div>
 <h2 *ngFor="let boardItemBackend of boardItemsBackend; let i = index" class="margin-item" >
+<!-- <h2 *ngFor="let boardItemBackend of boardItemsBackend | statusFilter: 'Completed'; let i = index" class="margin-item" > -->
+
 {{ boardItemBackend.title }}
 
   <mat-card *ngFor="let task of boardItemBackend.tasks; let i = index" class="margin-item" >

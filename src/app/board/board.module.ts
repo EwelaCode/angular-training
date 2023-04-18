@@ -22,6 +22,7 @@ import { ContentProjectionComponent } from './content-projection/content-project
 import { ItemDirectiveDirective } from './item-directive.directive';
 import { AddItemComponent } from './add-item/add-item.component';
 import { SearchComponent } from './search/search.component';
+import { StatusFilterPipe } from '../shared/status-filter.pipe'
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SearchComponent } from './search/search.component';
     ItemDirectiveDirective,
     AddItemComponent,
     SearchComponent,
+    StatusFilterPipe,
   ],
   imports: [
     ReactiveFormsModule,

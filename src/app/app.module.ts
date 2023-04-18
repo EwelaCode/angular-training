@@ -30,7 +30,7 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { StoreModule } from '@ngrx/store';
 // import { reducers, metaReducers } from './board/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers } from './reducers'
+import { reducers } from './reducers';
 
 @NgModule({
   declarations: [
