@@ -18,7 +18,7 @@
 
 {{ boardItemBackend.title }}
 
-  <mat-card *ngFor="let task of boardItemBackend.tasks; let i = index" class="margin-item" >
+  <mat-card *ngFor="let task of boardItemBackend.tasks; let i = index" class="animated-card" (click)="resizeCard()" [@openClose]="isSelected ? 'selected' : 'unSelected'">
       <mat-card-header >
         <mat-card-title>{{ task.title}}<mat-chip class="margin-item" [style.--mdc-chip-elevated-container-color]="getStatusColor(boardItemBackend.title)">{{boardItemBackend.title}}</mat-chip></mat-card-title>
       </mat-card-header>
@@ -76,8 +76,11 @@
           <!-- [style.--mdc-chip-label-text-color]="getStatusColor()" -->
           <!-- [class] https://angular.io/guide/class-binding -->
           <!-- [class.selected]="boardItem.name === selectedItem.name" -->
-          <mat-card-title>{{ boardItem.name}}<mat-chip class="margin-item"
-              [style.--mdc-chip-elevated-container-color]="getStatusColor(boardItem.status)">{{boardItem.status}}</mat-chip></mat-card-title>
+          <mat-card-title>{{ boardItem.name}}
+            <mat-chip class="margin-item"
+              [style.--mdc-chip-elevated-container-color]="getStatusColor(boardItem.status)">{{boardItem.status}}
+            </mat-chip>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           {{ boardItem.description }}
@@ -124,3 +127,5 @@
 
 <!-- <input type="text" [(ngModel)]="userName" ><br/>
     {{userName}} -->
+
+<app-animations></app-animations>

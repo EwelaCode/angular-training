@@ -7,7 +7,6 @@ import { DialogContentComponent } from './item-dialog/dialog-content/dialog-cont
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 
-
 import {MatIconModule} from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -26,6 +25,7 @@ import { AddItemComponent } from './add-item/add-item.component';
 import { SearchComponent } from './search/search.component';
 import { StatusFilterPipe } from '../shared/status-filter.pipe'
 import { BoardEffects } from './board.effects';
+import { AnimationsComponent } from './animations/animations.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { BoardEffects } from './board.effects';
     AddItemComponent,
     SearchComponent,
     StatusFilterPipe,
+    AnimationsComponent,
   ],
   imports: [
     ReactiveFormsModule,

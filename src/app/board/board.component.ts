@@ -1,5 +1,5 @@
 import { Observable, Subject, Subscription, startWith, switchMap, takeUntil } from 'rxjs';
-
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BoardItem } from '../shared/boardItem.model';
 import { BoardService } from './board.service';
@@ -13,7 +13,26 @@ import { SetBoardItems } from '../reducers/board.actions';
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
-  providers: [BoardService]
+  providers: [BoardService],
+  animations: [
+    trigger('openClose', [
+      state('selected', style({
+        opacity: 1,
+        backgroundColor: 'white',
+        margin: '50px',
+      })),
+      state('unSelected', style({
+        opacity: 0.7,
+        backgroundColor: '#03fccf',
+      })),
+      transition('selected => unSelected', [
+        animate(400)
+      ]),
+      transition('unSelected => selected', [
+        animate('1s')
+      ]),
+    ]),
+  ],
 })
 export class BoardComponent implements OnInit, OnDestroy {
   boardItems: BoardItem[] = [];
@@ -25,6 +44,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   userName = 'My user test name for 2 way Data-Binding';
 
   errorMessage: string | null = null;
+  isSelected = true;
 
   boardItemsBackend: BoardColumn[] = [];
   // private subscription: Subscription;
@@ -80,6 +100,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.boardItemsService.addBoardColumns().subscribe(resData => {
       console.log(resData);
     });
+  }
+
+  resizeCard() {
+    this.isSelected = !this.isSelected;
   }
 
   ngOnDestroy(): void {

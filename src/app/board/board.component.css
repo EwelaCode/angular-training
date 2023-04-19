@@ -16,3 +16,8 @@
   font-weight: bold;
   color: red;
 }
+
+.animated-card {
+  margin: 20px;
+  cursor: pointer;
+}

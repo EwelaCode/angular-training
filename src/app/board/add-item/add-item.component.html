@@ -22,9 +22,7 @@
   <br>
   <br>
   <div *ngIf="loading">Loading...</div>
-  <button mat-raised-button color="primary" >Add Item</button>
-
-  <!-- <button mat-raised-button color="primary"[disabled]="addItemForm.invalid" >Add Item</button> -->
+  <button mat-raised-button color="primary"[disabled]="addItemForm.invalid" >Add Item</button>
   <div  *ngIf="errorMessage" class="error-msg">{{errorMessage}}</div>
   <br>
   <br>
