@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardComponent } from './board.component';
 import { ItemComponent } from './item/item.component';
-import { ItemDialogComponent } from './item-dialog/item-dialog.component';
-import { DialogContentComponent } from './item-dialog/dialog-content/dialog-content.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -31,8 +29,6 @@ import { AnimationsComponent } from './animations/animations.component';
   declarations: [
     BoardComponent,
     ItemComponent,
-    ItemDialogComponent,
-    DialogContentComponent,
     ContentProjectionComponent,
     ItemDirectiveDirective,
     AddItemComponent,
@@ -62,8 +58,6 @@ import { AnimationsComponent } from './animations/animations.component';
     CommonModule,
     BoardComponent,
     ItemComponent,
-    ItemDialogComponent,
-    DialogContentComponent,
     ContentProjectionComponent,
     ItemDirectiveDirective
   ],
