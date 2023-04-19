@@ -16,19 +16,19 @@ import { SetBoardItems } from '../reducers/board.actions';
   providers: [BoardService],
   animations: [
     trigger('openClose', [
-      state('selected', style({
+      state('1', style({
         opacity: 1,
         backgroundColor: 'white',
         margin: '50px',
       })),
-      state('unSelected', style({
+      state('0', style({
         opacity: 0.7,
         backgroundColor: '#03fccf',
       })),
-      transition('selected => unSelected', [
+      transition('* => false', [
         animate(400)
       ]),
-      transition('unSelected => selected', [
+      transition('* => 1', [
         animate('1s')
       ]),
     ]),
