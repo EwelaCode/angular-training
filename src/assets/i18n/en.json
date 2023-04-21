@@ -1,4 +1,8 @@
 {
   "HELLO": "hello {{value}}!!!!!",
-  "NEXT": "Next translated text"
+  "NEXT": "Next translated text",
+  "SWITCH_LANGUAGE": "Switch language",
+  "BOARD": "Board",
+  "LOGIN": "Login",
+  "SIGN_IN": "Sign In"
 }

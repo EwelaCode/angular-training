@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./playground.component.css']
 })
 export class PlaygroundComponent {
+  param = {value: 'Ewelina'};
 
 }

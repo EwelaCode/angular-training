@@ -1,1 +1,8 @@
-<p>playground works!</p>
+<div>Translation playground</div>
+<!-- Recommended -->
+<div>{{ 'HELLO' | translate:param }}</div>
+<div translate [translateParams]="param">HELLO</div>
+<div [innerHTML]="'NEXT' | translate"></div>
+<hr>
+<button appHighlight>My test button - with Directive</button>
+

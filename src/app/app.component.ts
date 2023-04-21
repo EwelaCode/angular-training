@@ -14,8 +14,6 @@ import { slideInAnimation } from './animations';
 export class AppComponent {
   title = 'my-app';
 
-  param = {value: 'world'};
-
     constructor(private contexts: ChildrenOutletContexts,
       public translate: TranslateService
       ) {

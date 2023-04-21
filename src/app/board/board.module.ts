@@ -23,7 +23,6 @@ import { AddItemComponent } from './add-item/add-item.component';
 import { SearchComponent } from './search/search.component';
 import { StatusFilterPipe } from '../shared/status-filter.pipe'
 import { BoardEffects } from './board.effects';
-import { AnimationsComponent } from './animations/animations.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -35,7 +34,6 @@ import { TranslateModule } from '@ngx-translate/core';
     AddItemComponent,
     SearchComponent,
     StatusFilterPipe,
-    AnimationsComponent,
   ],
   imports: [
     ReactiveFormsModule,

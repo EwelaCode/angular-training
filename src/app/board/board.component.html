@@ -1,9 +1,5 @@
 <div class="margin-item">
   <!-- <div *ngFor="let item of (data$| async)?.boardItems">{{ item.title }}!!!!!!</div> -->
-  <div>TRANSLATION</div>
-  <div>{{ 'NEXT' | translate }}</div>
-
-
   <app-search></app-search>
   <!-- Boards from Backend -->
 <div><h1>Server Data</h1></div>
@@ -108,22 +104,9 @@
 </app-content-projection>
 </div>
 
-
-<div>
-  <h2>
-    Fetch data from Backend:
-  </h2>
-  <button (click)="addColumns()">Add Columns</button>
-</div>
-
-
-<button appHighlight>My test button - with Directive</button>
-
 <!-- <app-item (nameChange)="nameOnParent=$event"  [name]="nameOnParent"></app-item> -->
 <!-- <app-item [(name)]="nameOnParent"></app-item> -->
 
 
 <!-- <input type="text" [(ngModel)]="userName" ><br/>
     {{userName}} -->
-
-<app-animations></app-animations>
