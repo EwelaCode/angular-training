@@ -10,7 +10,7 @@ export interface BoardColumn {
 }
 
 export interface BoardItem {
-  id:	string,
+  id?:	string,
   title:	string,
   description:	string,
   columnId:	string,
