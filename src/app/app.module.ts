@@ -34,6 +34,7 @@ import { reducers } from './reducers';
 // import ngx-translate and the http loader
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { PlaygroundComponent } from './playground/playground.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
     SignupComponent,
     ErrorPageComponent,
     AuthComponent,
+    PlaygroundComponent,
   ],
   imports: [
     HttpClientModule,
