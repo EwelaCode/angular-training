@@ -1,4 +1,6 @@
 import { BoardColumn } from "../board/board-items";
+import {produce} from "immer";
+
 import * as BoardActions from "./board.actions";
 
 export interface BoardItemsState {
@@ -26,10 +28,10 @@ export function boardItemsReducer(
       };
 
     case BoardActions.ADD_BOARD_ITEM:
-      return {
-        ...state,
-        boardItems: state.boardItems.map(el => el.id !== action.payload.columnId? el : el.tasks.push(action.payload)),
-      };
+      const nextState = produce(state, draftState => {
+        draftState.boardItems.map(el => el.id !== action.payload.columnId? el : el.tasks.push(action.payload))
+      })
+      return nextState;
     case BoardActions.UPDATE_BOARD_ITEM:
       const boardItem = state.boardItems[state.editedIngredientIndex];
       const updatedBoardItem = {
