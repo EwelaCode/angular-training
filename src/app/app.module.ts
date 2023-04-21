@@ -1,10 +1,10 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule, isDevMode, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './header/header.component';
@@ -31,6 +31,9 @@ import { StoreModule } from '@ngrx/store';
 // import { reducers, metaReducers } from './board/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './reducers';
+// import ngx-translate and the http loader
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -64,8 +67,36 @@ import { reducers } from './reducers';
     StoreModule.forRoot(reducers),
     // StoreModule.forRoot(reducers, { metaReducers }),
     // isDevMode() ? StoreDevtoolsModule.instrument() : [],
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient],
+      }
+  })
   ],
-  providers: [httpInterceptorProviders],
+  providers: [
+    httpInterceptorProviders,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [HttpClient],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
+
+export function initializeApp(http: HttpClient) {
+  return async () => {
+    const config = await http.get('/assets/config.json').toPromise();
+    return config;
+  };
+}

@@ -1,4 +1,7 @@
 <app-header></app-header>
+<button (click)="useLanguage('de')">de</button>
+<button (click)="useLanguage('en')">en</button>
+<button (click)="useLanguage('fr')">de</button>
 <!-- <app-board></app-board> -->
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
@@ -10,3 +13,12 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet></router-outlet>
+
+<div>Translation playground</div>
+<!-- Recommended -->
+<div>{{ 'HELLO' | translate:param }}</div>
+
+<div translate [translateParams]="{value: 'world'}">HELLO</div>
+<div [innerHTML]="'HELLO' | translate"></div>
+
+

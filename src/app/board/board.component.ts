@@ -8,6 +8,7 @@ import { initialBoardItems } from '../shared/mocks';
 import { Store } from '@ngrx/store';
 import { State } from '../reducers';
 import { SetBoardItems } from '../reducers/board.actions';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-board',

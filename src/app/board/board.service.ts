@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
-import { initialBoardItems } from '../shared/mocks';
 import { HttpClient } from '@angular/common/http';
 import { BoardColumn, BoardItem, BoardItems } from './board-items';
 import { environment } from 'src/environments/environment';
 import { Observable, Subject, map, tap } from 'rxjs';
+import { ConfigService } from '../config.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,13 +15,16 @@ export class BoardService {
 
   dataChanged$ = new Subject<void>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private configService: ConfigService
+    ) {}
 
   getBoardItems() {
+    const apiUrl = Location.joinWithSlash(this.configService.config.url , '/board')
     // safe option to connect url to avoid // or no slash at all => Location.joinWithSlash
     //<BoardItems[]>
     return this.http
-      .get<BoardItems>(Location.joinWithSlash(environment.url, '/board'))
+      .get<BoardItems>(apiUrl)
       .pipe(
         map((data) => data.columns),
       );

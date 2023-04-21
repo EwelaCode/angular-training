@@ -24,6 +24,7 @@ import { SearchComponent } from './search/search.component';
 import { StatusFilterPipe } from '../shared/status-filter.pipe'
 import { BoardEffects } from './board.effects';
 import { AnimationsComponent } from './animations/animations.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AnimationsComponent } from './animations/animations.component';
     MatInputModule,
     HighlightDirective,
     MatRadioModule,
-    EffectsModule.forRoot([BoardEffects])
+    EffectsModule.forRoot([BoardEffects]),
+    TranslateModule,
   ],
   exports: [
     CommonModule,
