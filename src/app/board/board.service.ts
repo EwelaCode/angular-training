@@ -30,12 +30,6 @@ export class BoardService {
       );
   }
 
-  addBoardColumns() {
-    return this.http.post(Location.joinWithSlash(environment.url, '/columns'), {
-      title: 'Test',
-    });
-  }
-
   addBoardItem(data: BoardItem) {
     return this.http.post(Location.joinWithSlash(environment.url, '/tasks'), data)
       .pipe(
