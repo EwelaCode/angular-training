@@ -25,7 +25,7 @@ export class AppComponent {
     }
 
     getRouteAnimationData() {
-      return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
+      return this.contexts.getContext('primary')?.route?.snapshot?.url;
     }
 
     useLanguage(language: string): void {

@@ -35,6 +35,7 @@ import { reducers } from './reducers';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { PlaygroundComponent } from './playground/playground.component';
+import { ConfigService } from './config.service';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,7 @@ import { PlaygroundComponent } from './playground/playground.component';
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [HttpClient],
+      deps: [ConfigService],
       multi: true
     }
   ],
@@ -96,9 +97,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 
-export function initializeApp(http: HttpClient) {
-  return async () => {
-    const config = await http.get('/assets/config.json').toPromise();
-    return config;
-  };
+export function initializeApp(config: ConfigService) {
+  return () => config.initialize();
 }

@@ -8,7 +8,7 @@ import { PlaygroundComponent } from './playground/playground.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/board', pathMatch: 'full' },
-  { path: 'board', component: BoardComponent, data: { animation: 'toggleBoard' }
+  { path: 'board', component: BoardComponent
   // we need to add second <router-outlet></router-outlet> to handle children paths
   //children: [
     // {
@@ -20,7 +20,7 @@ const routes: Routes = [
     //   component: ChildBComponent, // another child route component that the router renders
     // },
   },
-  { path: 'playground', component: PlaygroundComponent, data: { animation: 'togglePlayground' } },
+  { path: 'playground', component: PlaygroundComponent},
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: '**', component: ErrorPageComponent }
