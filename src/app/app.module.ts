@@ -36,6 +36,8 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { PlaygroundComponent } from './playground/playground.component';
 import { ConfigService } from './config.service';
+import { OneTimePasswordComponent } from './otp-form/one-time-password/one-time-password.component';
+import { OtpFormComponent } from './otp-form/otp-form.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { ConfigService } from './config.service';
     ErrorPageComponent,
     AuthComponent,
     PlaygroundComponent,
+    OneTimePasswordComponent,
+    OtpFormComponent,
   ],
   imports: [
     HttpClientModule,

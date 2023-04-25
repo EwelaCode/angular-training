@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { PlaygroundComponent } from './playground/playground.component';
+import { OneTimePasswordComponent } from './otp-form/one-time-password/one-time-password.component';
+import { OtpFormComponent } from './otp-form/otp-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/board', pathMatch: 'full' },
@@ -20,7 +22,8 @@ const routes: Routes = [
     //   component: ChildBComponent, // another child route component that the router renders
     // },
   },
-  { path: 'playground', component: PlaygroundComponent},
+  { path: 'otp', component: OtpFormComponent},
+  { path: 'playground', component: PlaygroundComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: '**', component: ErrorPageComponent }

@@ -7,7 +7,8 @@
   <span class="example-spacer"></span>
   <span>{{ 'SWITCH_LANGUAGE' | translate }}:</span>
   <button mat-raised-button (click)="useLanguage('pl')" style="margin: 20px">Polski</button>
-<button mat-raised-button (click)="useLanguage('en')">English</button>
+  <button mat-raised-button (click)="useLanguage('en')" style="margin: 20px">English</button>
+  <span><a routerLink="/otp" style="text-decoration: none">{{ 'OTP' | translate }}</a></span>
   <span style="margin: 20px"><a routerLink="/login" style="text-decoration: none">{{ 'LOGIN' | translate }}</a></span>
   <span><a routerLink="/signup" style="text-decoration: none">{{ 'SIGN_IN' | translate }}</a></span>
 </mat-toolbar>

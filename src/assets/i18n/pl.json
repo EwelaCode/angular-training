@@ -1,8 +1,9 @@
 {
-  "HELLO": "Witaj {{value}}!!!!!",
-  "NEXT": "Twoj tekst",
-  "SWITCH_LANGUAGE": "Zmień język",
   "BOARD": "Tablica",
+  "HELLO": "Witaj {{value}}!!!!!",
   "LOGIN": "Zaloguj",
-  "SIGN_IN": "Zarejestruj"
+  "NEXT": "Twoj tekst",
+  "OTP": "Jednorazowe-Haslo",
+  "SIGN_IN": "Zarejestruj",
+  "SWITCH_LANGUAGE": "Zmień język"
 }

@@ -1,8 +1,9 @@
 {
-  "HELLO": "hello {{value}}!!!!!",
-  "NEXT": "Next translated text",
-  "SWITCH_LANGUAGE": "Switch language",
   "BOARD": "Board",
+  "HELLO": "hello {{value}}!!!!!",
   "LOGIN": "Login",
-  "SIGN_IN": "Sign In"
+  "NEXT": "Next translated text",
+  "OTP": "One-Time-Password",
+  "SIGN_IN": "Sign In",
+  "SWITCH_LANGUAGE": "Switch language"
 }

@@ -1,0 +1,4 @@
+<app-one-time-password #input="ngModel" [(ngModel)]="data" />
+<b>Entered value:</b> {{data}}
+<br>
+<button mat-raised-button color="primary" [disabled]="!input.valid">Submit</button>
