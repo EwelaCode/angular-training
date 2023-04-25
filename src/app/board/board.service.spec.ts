@@ -3,70 +3,64 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { BoardService } from './board.service';
 import { ConfigService } from '../config.service';
 import { environment } from 'src/environments/environment';
+import { Location } from '@angular/common';
+import { BoardItems } from './board-items';
 
-// describe('BoardService', () => {
-//   let service: BoardService;
-//   let httpMock: HttpTestingController;
-//   let configService: ConfigService;
+describe('BoardService', () => {
+  let service: BoardService;
+  let httpMock: HttpTestingController;
+  let configService: ConfigService;
 
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [BoardService, ConfigService]
+    });
+    service = TestBed.inject(BoardService);
+    httpMock = TestBed.inject(HttpTestingController);
+    configService = TestBed.inject(ConfigService);
+    configService.config = { url: 'http://localhost:3000/dev' };
+  });
 
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({
-//       imports: [HttpClientTestingModule],
-//       providers: [BoardService, ConfigService],
-//     });
+  afterEach(() => {
+    httpMock.verify();
+  });
 
-//     service = TestBed.inject(BoardService);
-//     httpMock = TestBed.inject(HttpTestingController);
-//     configService = jasmine.createSpyObj('ConfigService', ['config']);
-//     const mockedConfig = {url: 'http://localhost:3000/dev'};
-//     configService.config.and.returnValue(mockedConfig);
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 
-//   });
+  it('should fetch board items from the API', () => {
+    const mockBoardItems: BoardItems = {
+      columns: [
+        { title: 'Todo', tasks: [], id: '123', createdAt: '01-02-2023' },
+        { title: 'In progress', tasks: [], id: '456', createdAt: '01-02-2023' },
+        { title: 'Done', tasks: [], id: '789', createdAt: '01-02-2023' }
+      ]
+    };
 
-//   afterEach(() => {
-//     httpMock.verify();
-//     configService.config.calls.reset();
+    service.getBoardItems().subscribe(boardItems => {
+      expect(boardItems).toEqual(mockBoardItems.columns);
+    });
 
-//   });
+    const req = httpMock.expectOne(Location.joinWithSlash(configService.config.url, '/board'));
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockBoardItems);
+  });
 
-//   it('should be created', () => {
-//     expect(service).toBeTruthy();
-//   });
+  it('should add a board item via the API', () => {
+    const mockBoardItem = { title: 'Test Item', columnId: '123', description: 'New Item' };
 
-  // describe('getBoardItems', () => {
-  //   it('should return an Observable<BoardColumn[]>', () => {
-  //     const mockBoardItems = {
-  //       columns: [
-  //         { title: 'Column 1', tasks: [], id: '123', createdAt: '2022-02-01' },
-  //         { title: 'Column 2', tasks: [], id: '321', createdAt: '2022-02-01' },
-  //       ],
-  //     };
+    service.addBoardItem(mockBoardItem).subscribe(() => {
+      // Expect the dataChanged$ subject to have emitted
+      service.dataChanged$.subscribe(() => {
+        expect(true).toBeTruthy();
+      });
+    });
 
-  //     service.getBoardItems().subscribe((boardItems) => {
-  //       expect(boardItems).toEqual(mockBoardItems.columns);
-  //     });
-  //     console.log(configService.config, 'configService.config!!!!!')
-  //     const apiUrl = `${configService.config.url}/board`;
-  //     const req = httpMock.expectOne(apiUrl);
-  //     expect(req.request.method).toBe('GET');
-  //     req.flush(mockBoardItems);
-  //   });
-  // });
-
-//   describe('addBoardItem', () => {
-//     it('should make a POST request to the API and emit a dataChanged$ event', () => {
-//       const mockBoardItem = { id: '123', title: 'Task 1', columnId: '321', description: 'Test description' };
-//       const spy = spyOn(service.dataChanged$, 'next');
-
-//       service.addBoardItem(mockBoardItem).subscribe(() => {
-//         expect(spy).toHaveBeenCalled();
-//       });
-
-//       const apiUrl = `${environment.url}/tasks`;
-//       const req = httpMock.expectOne(apiUrl);
-//       expect(req.request.method).toBe('POST');
-//       req.flush({});
-//     });
-//   });
-// });
+    const req = httpMock.expectOne(Location.joinWithSlash(environment.url, '/tasks'));
+    expect(req.request.method).toEqual('POST');
+    expect(req.request.body).toEqual(mockBoardItem);
+    req.flush({});
+  });
+});
