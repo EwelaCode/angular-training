@@ -33,9 +33,9 @@ describe('BoardService', () => {
   it('should fetch board items from the API', () => {
     const mockBoardItems: BoardItems = {
       columns: [
-        { title: 'Todo', tasks: [], id: '123', createdAt: '01-02-2023' },
-        { title: 'In progress', tasks: [], id: '456', createdAt: '01-02-2023' },
-        { title: 'Done', tasks: [], id: '789', createdAt: '01-02-2023' }
+        { title: 'To Do', tasks: [], id: '123', createdAt: '01-02-2023' },
+        { title: 'In Progress', tasks: [], id: '456', createdAt: '01-02-2023' },
+        { title: 'Completed', tasks: [], id: '789', createdAt: '01-02-2023' }
       ]
     };
 
@@ -52,7 +52,7 @@ describe('BoardService', () => {
     const mockBoardItem = { title: 'Test Item', columnId: '123', description: 'New Item' };
 
     service.addBoardItem(mockBoardItem).subscribe(() => {
-      // Expect the dataChanged$ subject to have emitted
+      // Expect the dataChanged$ subject to have been emitted
       service.dataChanged$.subscribe(() => {
         expect(true).toBeTruthy();
       });
