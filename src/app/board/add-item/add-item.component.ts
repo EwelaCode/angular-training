@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BoardService } from '../board.service';
 import { BoardColumn } from '../board-items';
@@ -11,7 +11,8 @@ import * as BoardActions from "../../reducers/board.actions";
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
-  styleUrls: ['./add-item.component.css']
+  styleUrls: ['./add-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddItemComponent implements OnInit {
   @Input() boardItemsBackend:  Observable<{boardItems: BoardColumn[]}>;

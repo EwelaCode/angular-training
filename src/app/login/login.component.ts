@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { NgForm } from '@angular/forms';
@@ -6,7 +6,8 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
   data = '';

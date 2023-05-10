@@ -1,6 +1,6 @@
 import { Observable, Subject, Subscription, startWith, switchMap, takeUntil } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { BoardItem } from '../shared/boardItem.model';
 import { BoardService } from './board.service';
 import { BoardColumn, BoardItems } from './board-items';
@@ -33,6 +33,7 @@ import { SetBoardItems } from '../reducers/board.actions';
       ]),
     ]),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardComponent implements OnInit, OnDestroy {
   boardItems: BoardItem[] = [];
